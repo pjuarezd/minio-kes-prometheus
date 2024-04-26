@@ -1,0 +1,71 @@
+apiVersion: minio.min.io/v2
+kind: Tenant
+metadata:
+  name: myminio
+  namespace: minio-tenant-1
+spec:
+  users:
+    - name: storage-user
+  configuration:
+    name: storage-configuration
+  requestAutoCert: false
+  externalCertSecret:
+    - name: myminio-tls
+      type: cert-manager.io/v1
+  pools:
+    - servers: 4
+      name: pool-0
+      topologySpreadConstraints: [ ]
+      volumesPerServer: 4
+      nodeSelector: { }
+      tolerations: [ ]
+      affinity:
+        nodeAffinity: { }
+        podAffinity: { }
+        podAntiAffinity: { }
+      resources: { }
+      volumeClaimTemplate:
+        apiVersion: v1
+        kind: persistentvolumeclaims
+        metadata: { }
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Ti
+          storageClassName: standard
+        status: { }
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+      containerSecurityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        seccompProfile:
+          type: RuntimeDefault
+  kes:
+    externalCertSecret:
+      name: myminio-kes-tls
+      type: cert-manager.io/v1
+    image: minio/kes:2024-03-13T17-52-13Z
+    imagePullPolicy: IfNotPresent
+    kesSecret:
+      name: kes-configuration
+    keyName: my-minio-key
+    replicas: 1
+    resources: { }
+    securityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: Always
+      runAsGroup: 1000
+      runAsNonRoot: true
+      runAsUser: 1000

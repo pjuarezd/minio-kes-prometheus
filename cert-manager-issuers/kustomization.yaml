@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - selfsigned-root-clusterissuer.yaml
+  - minio-tenant-1-namespace.yaml
+  - minio-tenant-1-issuer.yaml
+  - minio-tenant-1-ca-certificate.yaml

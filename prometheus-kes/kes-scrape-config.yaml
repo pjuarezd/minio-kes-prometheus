@@ -1,0 +1,28 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: kes-scrape-config
+  namespace: minio-tenant-1
+  labels:
+    prometheus: kes-monitoring-prometheus
+spec:
+  staticConfigs:
+    - labels:
+        job: minio-kes-resource
+      targets:
+        - myminio-kes-hl-svc.minio-tenant-1.svc.cluster.local:7373
+  metricsPath: /v1/metrics
+  scrapeInterval: 10s
+  scheme: HTTPS
+  tlsConfig:
+    cert:
+      secret:
+        name: myminio-client-tls
+        key: public.crt
+    keySecret:
+        name: myminio-client-tls
+        key: public.key
+    ca:
+      secret:
+        name: myminio-client-tls
+        key: public.crt
