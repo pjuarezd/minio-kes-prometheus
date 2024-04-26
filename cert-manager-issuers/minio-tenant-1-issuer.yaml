@@ -4,4 +4,5 @@ metadata:
   name: minio-tenant-1-issuer
   namespace: minio-tenant-1
 spec:
-  selfSigned: { }
+  ca:
+    secretName: minio-tenant-1-ca-tls

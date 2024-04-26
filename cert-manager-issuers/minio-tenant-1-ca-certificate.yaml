@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: tenant-certmanager-ca-certificate
+  name: minio-tenant-1-ca-certificate
   namespace: minio-tenant-1
 spec:
   isCA: true

@@ -33,6 +33,14 @@ Install Cert Manager Issuers
 kubectl apply -k cert-manager-issuers
 ```
 
+Install CA certificate into MinIO Operator
+
+```shell
+kubectl get secret minio-tenant-1-ca-tls -n minio-tenant-1 -ojsonpath="{.data['ca\.crt']}" | base64 --decode > ca.crt
+kubectl create secret generic operator-ca-tls-minio-tenant-1 --from-file=ca.crt -n minio-operator
+kubectl rollout restart deployment.apps/minio-operator -n minio-operator
+```
+
 Install vault
 
 ```shell
@@ -67,7 +75,7 @@ Set the App role ID and Approle secret in `kes-configuration-secret.yaml`
 Install Tenant and KES
 
 ```shell
-kubectl apply -k cert-manager-issuers
+kubectl apply -k tenant
 ```
 
 Install prometheus and KES Scrapper

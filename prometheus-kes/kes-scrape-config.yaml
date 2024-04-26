@@ -21,8 +21,8 @@ spec:
         key: public.crt
     keySecret:
         name: myminio-client-tls
-        key: public.key
+        key: private.key
     ca:
       secret:
-        name: myminio-client-tls
-        key: public.crt
+        name: minio-tenant-1-ca-tls
+        key: ca.crt

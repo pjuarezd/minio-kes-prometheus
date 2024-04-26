@@ -9,6 +9,6 @@ spec:
     - "myminio-kes-hl-svc.minio-tenant-1.svc.cluster.local"
     - "myminio-kes-0.minio-tenant-1-kes-hl-svc.minio-tenant-1.svc.cluster.local"
     - "myminio-kes-hl-svc.minio-tenant-1.svc.cluster.local"
-  secretName: myminio-kes-tls
+  secretName: myminio-client-tls
   issuerRef:
     name: minio-tenant-1-issuer

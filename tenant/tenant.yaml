@@ -12,6 +12,12 @@ spec:
   externalCertSecret:
     - name: myminio-tls
       type: cert-manager.io/v1
+  externalCaCertSecret:
+    - name: minio-tenant-1-ca-tls
+      type: cert-manager.io/v1
+  externalClientCertSecret:
+    name: myminio-client-tls
+    type: cert-manager.io/v1
   pools:
     - servers: 4
       name: pool-0
@@ -54,7 +60,10 @@ spec:
           type: RuntimeDefault
   kes:
     externalCertSecret:
-      name: myminio-kes-tls
+      name: myminio-client-tls
+      type: cert-manager.io/v1
+    clientCertSecret:
+      name: myminio-client-tls
       type: cert-manager.io/v1
     image: minio/kes:2024-03-13T17-52-13Z
     imagePullPolicy: IfNotPresent
