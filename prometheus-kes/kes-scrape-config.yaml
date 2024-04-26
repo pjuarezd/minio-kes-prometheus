@@ -18,10 +18,10 @@ spec:
     cert:
       secret:
         name: myminio-client-tls
-        key: public.crt
+        key: tls.crt
     keySecret:
         name: myminio-client-tls
-        key: private.key
+        key: tls.key
     ca:
       secret:
         name: minio-tenant-1-ca-tls

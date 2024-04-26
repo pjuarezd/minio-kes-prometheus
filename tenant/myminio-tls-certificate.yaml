@@ -4,13 +4,14 @@ metadata:
   name: myminio-tls-cert
   namespace: minio-tenant-1
 spec:
-  commonName: "*.minio-tenant-1.svc.cluster.local"
   dnsNames:
     - "localhost"
-    - "myminio.minio-tenant-1"
-    - "myminio.minio-tenant-1.svc"
-    - "*.myminio.minio-tenant-1.svc.cluster.local"
+    - "minio.minio-tenant-1"
+    - "minio.minio-tenant-1.svc"
+    - "minio.minio-tenant-1.svc.cluster.local"
+    - "*.minio-tenant-1.svc.cluster.local"
     - "*.myminio-hl.minio-tenant-1.svc.cluster.local"
+    - "*.myminio.minio-tenant-1.svc.cluster.local"
   secretName: myminio-tls
   issuerRef:
     name: minio-tenant-1-issuer
